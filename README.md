@@ -34,6 +34,15 @@ int main() {
     // ...
 ```
 
+## Install and test
+
+Just copy `src/kahan.hpp` to your project.
+
+To test it here:
+
+- `make` (basic testing)
+- `make test` (official tests on [catch2](https://github.com/catchorg/Catch2))
+
 
 ## License
 

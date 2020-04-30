@@ -1,7 +1,7 @@
 #include <iostream>
 
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main()
-#include "../libs/catch2/catch.hpp"
+#include "libs/catch2/catch.hpp"
 
 // Some instructions for Catch2
 // https://github.com/catchorg/Catch2/blob/master/docs/test-cases-and-sections.md

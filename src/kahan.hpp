@@ -1,5 +1,10 @@
 #pragma once
 
+// kahan.cpp: implementation of Kahan Summation in C++
+// Author: Igor Machado Coelho
+// Date: 29-04-2020
+// License: MIT License
+
 #include <iostream>
 
 namespace kahan {
@@ -15,13 +20,6 @@ private:
    T c{ 0 };
 
 public:
-   /*
-   tkahan(T& _val)
-     : val(_val)
-   {
-   }
-*/
-
    tkahan(T _val)
      : val(_val)
    {

@@ -10,19 +10,26 @@ struct tkahan
 {
 private:
    // "real" value
-   T val;
+   T val{ 0 };
    // pending correction
-   T c;
+   T c{ 0 };
 
 public:
+   /*
    tkahan(T& _val)
      : val(_val)
    {
    }
+*/
 
    tkahan(T _val)
      : val(_val)
    {
+   }
+
+   operator T() const
+   {
+      return val;
    }
 
    // copy assignment (for any valid element)

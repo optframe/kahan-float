@@ -1,2 +1,2 @@
 all:
-	g++ src/main.cpp -o appMain
+	g++ src/main_test.cpp -o appMain

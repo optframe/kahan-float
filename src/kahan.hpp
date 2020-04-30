@@ -77,7 +77,7 @@ using kfloat64 = tkahan<double>;
 
 // UTILS
 
-// print variable bits (MSB to LSB) -> Big Endian string format
+// print variable bits (MSB to LSB) -> Big Endian bitstring format
 void
 kprint_bin(int val, int sz)
 {

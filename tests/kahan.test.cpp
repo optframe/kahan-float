@@ -42,3 +42,19 @@ TEST_CASE("Kahan Tests 20x kfloat32 0.1 == 2.0")
       f += 0.1f;
    REQUIRE((float)f == 2.0);
 }
+
+TEST_CASE("Kahan Tests 20x double 0.1 <> 2.0")
+{
+   double f = 0.0;
+   for (unsigned i = 0; i < 20; i++)
+      f += 0.1;
+   REQUIRE(f != 2.0);
+}
+
+TEST_CASE("Kahan Tests 20x kfloat64 0.1 == 2.0")
+{
+   kfloat64 f = 0.0;
+   for (unsigned i = 0; i < 20; i++)
+      f += 0.1;
+   REQUIRE((double)f == 2.0);
+}

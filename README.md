@@ -36,9 +36,9 @@ int main() {
 
 ## Space and Time
 
-Type `kfloat32` occuppies 64 bits in fact (two internal variables), and more processing on every operation. It should be more stable than `double`, trying to avoid error propagation.
+Type `kfloat32` occuppies 64 bits in fact (two internal variables), and more processing on every operation. It should be more stable than `double`, trying to avoid error propagation. Precision should still be bigger on `double`, as long as one [properly use floating-point](https://en.wikipedia.org/wiki/Loss_of_significance).
 
-One can also do this for `kfloat64` (which occupies `64` bits) and should be definitely more stable than `double`.
+One can also do this for `kfloat64` (which occupies 128 bits) and should be definitely more stable than `double`.
 
 Finally, one can use `kfloat128` (that occupies 32 bytes = 256 bits) and should be more stable than `long double`.
 

@@ -46,4 +46,4 @@ To test it here:
 
 ## License
 
-MIT License
+MIT License - 2020

@@ -1,6 +1,6 @@
 #pragma once
 
-// kahan.cpp: implementation of Kahan Summation in C++
+// kahan.hpp: implementation of Kahan Summation in C++
 // Author: Igor Machado Coelho
 // Date: 29-04-2020
 // License: MIT License

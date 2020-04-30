@@ -34,6 +34,8 @@ main()
    float vf_875 = 0.875;
    kahan::print_IEEE754(vf_875);
 
+   // ======= 30 tests ========
+
    float x = 0;
    int k = 30;
    while (k--)
@@ -46,17 +48,33 @@ main()
       y += 0.1f;
    printf("y=%f\n", (float)y); // 3.000000
 
+   // ======= 1000 tests ========
+
    double x2 = 0;
    k = 1000;
    while (k--)
       x2 += 0.1f;
    printf("x2=%f\n", x2); // 100.000001
 
-   kfloat64 y2 = 0;
+   kfloat32 y2 = 0;
    k = 1000;
    while (k--)
       y2 += 0.1f;
-   printf("y2=%f\n", (double)y2); // 100.000000
+   printf("y2=%f\n", (float)y2); // 100.000000
+
+   kfloat64 y3 = 0;
+   k = 1000;
+   while (k--)
+      y3 += 0.1f;
+   printf("y3=%f\n", (double)y3); // 100.000000
+
+   // ======= 1000000 tests ========
+
+   kfloat32 z = 0;
+   k = 1000000;
+   while (k--)
+      z += 0.1f;
+   printf("z=%f\n", (float)z); // 100000.000000
 
    return 0;
 }

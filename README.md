@@ -34,6 +34,17 @@ int main() {
     // ...
 ```
 
+## Space and Time
+
+Type `kfloat32` occuppies 64 bits in fact (two internal variables), and more processing on every operation. It should be more stable than `double`, trying to avoid error propagation.
+
+One can also do this for `kfloat64` (which occupies `64` bits) and should be definitely more stable than `double`.
+
+Finally, one can use `kfloat128` (that occupies 32 bytes = 256 bits) and should be more stable than `long double`.
+
+Benchmarking is not properly done yet, but it is definitely expected to consume more time. Beware of aggressive code optimizations, that may perhaps remove kahan strategy completely (such as in `icc` compiler).
+For this reason, *always test* your code, to ensure operations are performing as expected.
+
 ## Install and test
 
 Just copy `src/kahan.hpp` to your project.

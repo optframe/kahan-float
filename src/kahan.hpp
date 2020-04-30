@@ -6,6 +6,7 @@
 // License: MIT License
 
 #include <iostream>
+#include <utility> // declval
 
 namespace kahan {
 
@@ -79,6 +80,16 @@ public:
 
 using kfloat32 = tkahan<float>;
 using kfloat64 = tkahan<double>;
+using kfloat128 = tkahan<long double>;
+
+// Testing type sizes
+
+struct kahan_helper
+{
+   static_assert(sizeof(kfloat32) == 8, "Expected 8 bytes on kfloat32");
+   static_assert(sizeof(kfloat64) == 16, "Expected 16 bytes on kfloat64");
+   static_assert(sizeof(kfloat128) == 32, "Expected 32 bytes on kfloat64");
+};
 
 // UTILS
 

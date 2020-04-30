@@ -54,6 +54,13 @@ To test it here:
 - `make` (basic testing)
 - `make test` (official tests on [catch2](https://github.com/catchorg/Catch2))
 
+## Learn more
+
+To learn more on IEEE754:
+
+- https://en.wikipedia.org/wiki/IEEE_754
+- https://www.h-schmidt.net/FloatConverter/IEEE754.html
+
 
 ## License
 

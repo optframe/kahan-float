@@ -65,6 +65,8 @@ public:
       std::cout << "t: '" << y << "'" << std::endl;
       this->c = (t - this->val) - y;
       std::cout << "this->c: '" << this->c << "'" << std::endl;
+      this->c = std::isnan(this->c) ? 0.0 : this->c;
+      std::cout << "*this->c: '" << this->c << "'" << std::endl;
       this->val = t;
       std::cout << "FINAL VAL: '" << this->val << "'" << std::endl;
       //

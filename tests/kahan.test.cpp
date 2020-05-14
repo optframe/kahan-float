@@ -208,12 +208,4 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
    REQUIRE(f3 == std::numeric_limits<float>::infinity());
    REQUIRE(f3 == ff3);
    REQUIRE(ff3 == (double)kff3);
-
-   REQUIRE(false);
-   /*
-   kfloat64 f = 0.0;
-   for (unsigned i = 0; i < 20; i++)
-      f += 0.1;
-   REQUIRE((double)f == 2.0);
-*/
 }

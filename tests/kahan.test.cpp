@@ -88,7 +88,7 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
 
    kfloat64 kff1 = std::numeric_limits<kahan::kfloat64>::infinity();
    std::cout << kff1 << std::endl;
-   REQUIRE(kff1 == ff1);
+   REQUIRE((double)kff1 == ff1);
 
    // float inf === double inf
    REQUIRE(f1 == ff1);
@@ -101,7 +101,7 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
 
    REQUIRE(f2 == std::numeric_limits<float>::infinity());
    REQUIRE(f2 == ff2);
-   REQUIRE(ff2 == kff2);
+   REQUIRE(ff2 == (double)kff2);
 
    // ================== NAN constant ================
    {
@@ -111,7 +111,7 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
 
       REQUIRE(std::isnan(fn));
       REQUIRE(std::isnan(ffn));
-      REQUIRE(std::isnan(kffn));
+      REQUIRE(std::isnan((double)kffn));
    }
 
    // ================== SNAN constant ================
@@ -124,18 +124,18 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
       REQUIRE(std::isnan(fn));
       REQUIRE(std::isnan(ffn));
       REQUIRE(std::isnan(lffn));
-      REQUIRE(std::isnan(kffn));
+      REQUIRE(std::isnan((double)kffn));
    }
 
    // ================== 1/0 ================
    {
       float fx = fone / (fone - fone + fzero);
       double ffx = ffone / (ffone - ffone + ffzero);
-      kfloat64 kffx = kffone / (kffone - kffone + kffzero);
+      kfloat64 kffx = (double)kffone / (double)(kffone - kffone + kffzero);
 
       REQUIRE(fx == std::numeric_limits<float>::infinity());
       REQUIRE(fx == ffx);
-      REQUIRE(ffx == kffx);
+      REQUIRE(ffx == (double)kffx);
    }
 
    // =============== REVERSE =================
@@ -153,11 +153,23 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
       REQUIRE(std::isnan(0.0 / 0.0));
       REQUIRE(std::isnan(INFINITY - INFINITY));
    }
+   // =============== ONE PLUS INF =================
+   {
+      float fm1 = 1.0 + f1;
+      double ffm1 = 1.0 + ff1;
+      kfloat64 kffm1 = 1.0 + kff1;
+
+      REQUIRE(fm1 == std::numeric_limits<float>::infinity());
+      REQUIRE(ffm1 == std::numeric_limits<double>::infinity());
+      REQUIRE(kffm1.getValue() == (double)std::numeric_limits<kfloat64>::infinity());
+      REQUIRE(!std::isnan(kffm1.getC()));
+      REQUIRE(kffm1 == std::numeric_limits<kfloat64>::infinity());
+   }
    // =============== ONE MINUS REVERSE =================
    {
-      float fm1 = 1 - f1;
-      double ffm1 = 1 - ff1;
-      kfloat64 kffm1 = 1 - kff1;
+      float fm1 = 1.0 - f1;
+      double ffm1 = 1.0 - ff1;
+      kfloat64 kffm1 = 1.0 - kff1;
 
       REQUIRE(fm1 == -std::numeric_limits<float>::infinity());
       REQUIRE(ffm1 == -std::numeric_limits<double>::infinity());
@@ -170,7 +182,7 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
    kff1 += 1; // add 1 to infinity
 
    REQUIRE(f1 == ff1);
-   REQUIRE(ff1 == kff1);
+   REQUIRE(ff1 == (double)kff1);
 
    std::cout << INFINITY << std::endl;
    std::cout << f1 << std::endl;
@@ -185,7 +197,7 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
 
    REQUIRE(f1 == std::numeric_limits<float>::infinity());
    REQUIRE(f1 == ff1);
-   REQUIRE(ff1 == kff1); // inf == -nan (if nothing is done about it...)
+   REQUIRE(ff1 == (double)kff1); // inf == -nan (if nothing is done about it...)
 
    // ================== ADD INFS ================
 
@@ -195,7 +207,7 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
 
    REQUIRE(f3 == std::numeric_limits<float>::infinity());
    REQUIRE(f3 == ff3);
-   REQUIRE(ff3 == kff3);
+   REQUIRE(ff3 == (double)kff3);
 
    REQUIRE(false);
    /*

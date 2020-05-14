@@ -27,7 +27,22 @@ public:
    {
    }
 
-   operator T() const
+   constexpr tkahan(T _val, T _c)
+     : val(_val), c(_c)
+   {
+   }
+
+   T getValue() const
+   {
+      return this->val;
+   }
+
+   T getC() const
+   {
+      return this->c;
+   }
+
+   explicit operator T() const
    {
       return val;
    }
@@ -44,9 +59,9 @@ public:
       std::cout << "this->c: '" << this->c << "'" << std::endl;
       if ((this->val == std::numeric_limits<T>::infinity()) || (add == std::numeric_limits<T>::infinity()))
          ;
-      float y = add - this->c;
+      T y = add - this->c;
       std::cout << "y: '" << y << "'" << std::endl;
-      float t = this->val + y;
+      T t = this->val + y;
       std::cout << "t: '" << y << "'" << std::endl;
       this->c = (t - this->val) - y;
       std::cout << "this->c: '" << this->c << "'" << std::endl;
@@ -56,12 +71,13 @@ public:
       return *this;
    }
 
-   /*
-   friend tkahan<T> operator-(tkahan<T> lhs, const X& rhs)
+   // reverse (unary minus)
+   tkahan<T> operator-() const
    {
-
+      return tkahan<T>(-this->val, -this->c);
    }
-*/
+
+   // ------------------
 
    // copy assignment (for any valid element)
    template<class X>
@@ -70,6 +86,17 @@ public:
       (*this) += -add; // reuse '+='
       return *this;
    }
+
+   // ------------------
+
+   /*
+   // copy return (for any valid element)
+   friend tkahan<T> operator+(float lhs, const tkahan<T>& rhs)
+   {
+      lhs += (float)rhs; // reuse '+='
+      return lhs;
+   }
+*/
 
    // copy return (for any valid element)
    template<class X>
@@ -86,6 +113,17 @@ public:
       lhs += -rhs; // reuse '+='
       return lhs;
    }
+
+   // ==================
+
+   bool operator==(const tkahan<T>& other) const
+   {
+      // strict check if both parts are the same...
+      // if you want weaker tests, cast to 'double' or 'float before
+      return (this->val == other.val) && (this->c == other.c);
+   }
+
+   // ==================
 
    friend std::ostream& operator<<(std::ostream& os, const tkahan<T>& k)
    {

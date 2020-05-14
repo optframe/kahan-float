@@ -8,6 +8,7 @@
 #include <iostream>
 #include <limits>  // numeric_limits (will extend this below)
 #include <utility> // declval
+#include <cmath> // isnan
 
 namespace kahan {
 
@@ -55,20 +56,13 @@ public:
       // this->val += add;  // will accumulate errors easily
       //
       // kahan operation
-      std::cout << "ADDING '" << add << "' TO '" << this->val << "'" << std::endl;
-      std::cout << "this->c: '" << this->c << "'" << std::endl;
-      if ((this->val == std::numeric_limits<T>::infinity()) || (add == std::numeric_limits<T>::infinity()))
-         ;
       T y = add - this->c;
-      std::cout << "y: '" << y << "'" << std::endl;
       T t = this->val + y;
-      std::cout << "t: '" << y << "'" << std::endl;
       this->c = (t - this->val) - y;
-      std::cout << "this->c: '" << this->c << "'" << std::endl;
-      this->c = std::isnan(this->c) ? 0.0 : this->c;
-      std::cout << "*this->c: '" << this->c << "'" << std::endl;
       this->val = t;
-      std::cout << "FINAL VAL: '" << this->val << "'" << std::endl;
+      // we must ensure that 'c' is never 'contaminated' by 'nan'
+      // TODO: verify that this is REALLY safe... looks like.
+      this->c = std::isnan(this->c) ? 0.0 : this->c;
       //
       return *this;
    }
@@ -212,6 +206,30 @@ print_IEEE754(float f32)
 // -------------------------------
 
 template<>
+struct std::numeric_limits<kahan::kfloat32>
+{
+   static constexpr bool has_infinity = std::numeric_limits<float>::has_infinity;
+   static constexpr bool has_quiet_NaN = std::numeric_limits<float>::has_quiet_NaN;
+   static constexpr bool has_signaling_NaN = has_quiet_NaN;
+   static constexpr float_denorm_style has_denorm = bool(__DBL_HAS_DENORM__) ? denorm_present : denorm_absent;
+   static constexpr bool has_denorm_loss = std::numeric_limits<float>::has_denorm_loss;
+
+   static constexpr kahan::kfloat32
+   infinity() noexcept { return std::numeric_limits<float>::infinity(); };
+
+   static constexpr kahan::kfloat32
+   quiet_NaN() noexcept { return std::numeric_limits<float>::quiet_NaN(); };
+
+   static constexpr kahan::kfloat32
+   signaling_NaN() noexcept { return std::numeric_limits<float>::signaling_NaN(); };
+
+   static constexpr kahan::kfloat32
+   denorm_min() noexcept { return std::numeric_limits<float>::denorm_min(); };
+
+   static constexpr bool is_iec559 = has_infinity && has_quiet_NaN && has_denorm == denorm_present;
+};
+
+template<>
 struct std::numeric_limits<kahan::kfloat64>
 {
    static constexpr bool has_infinity = std::numeric_limits<double>::has_infinity;
@@ -231,6 +249,30 @@ struct std::numeric_limits<kahan::kfloat64>
 
    static constexpr kahan::kfloat64
    denorm_min() noexcept { return std::numeric_limits<double>::denorm_min(); };
+
+   static constexpr bool is_iec559 = has_infinity && has_quiet_NaN && has_denorm == denorm_present;
+};
+
+template<>
+struct std::numeric_limits<kahan::kfloat128>
+{
+   static constexpr bool has_infinity = std::numeric_limits<long double>::has_infinity;
+   static constexpr bool has_quiet_NaN = std::numeric_limits<long double>::has_quiet_NaN;
+   static constexpr bool has_signaling_NaN = has_quiet_NaN;
+   static constexpr float_denorm_style has_denorm = bool(__DBL_HAS_DENORM__) ? denorm_present : denorm_absent;
+   static constexpr bool has_denorm_loss = std::numeric_limits<long double>::has_denorm_loss;
+
+   static constexpr kahan::kfloat128
+   infinity() noexcept { return std::numeric_limits<long double>::infinity(); };
+
+   static constexpr kahan::kfloat128
+   quiet_NaN() noexcept { return std::numeric_limits<long double>::quiet_NaN(); };
+
+   static constexpr kahan::kfloat128
+   signaling_NaN() noexcept { return std::numeric_limits<long double>::signaling_NaN(); };
+
+   static constexpr kahan::kfloat128
+   denorm_min() noexcept { return std::numeric_limits<long double>::denorm_min(); };
 
    static constexpr bool is_iec559 = has_infinity && has_quiet_NaN && has_denorm == denorm_present;
 };

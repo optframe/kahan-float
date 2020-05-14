@@ -2,10 +2,11 @@
 
 // kahan.hpp: implementation of Kahan Summation in C++
 // Author: Igor Machado Coelho
-// Date: 29-04-2020
+// Date: 29-04-2020 (first proposed, see official release info in beggining of file)
 // License: MIT License
 
 #include <iostream>
+#include <limits>  // numeric_limits (will extend this below)
 #include <utility> // declval
 
 namespace kahan {
@@ -21,7 +22,7 @@ private:
    T c{ 0 };
 
 public:
-   tkahan(T _val)
+   constexpr tkahan(T _val)
      : val(_val)
    {
    }
@@ -39,13 +40,28 @@ public:
       // this->val += add;  // will accumulate errors easily
       //
       // kahan operation
+      std::cout << "ADDING '" << add << "' TO '" << this->val << "'" << std::endl;
+      std::cout << "this->c: '" << this->c << "'" << std::endl;
+      if ((this->val == std::numeric_limits<T>::infinity()) || (add == std::numeric_limits<T>::infinity()))
+         ;
       float y = add - this->c;
+      std::cout << "y: '" << y << "'" << std::endl;
       float t = this->val + y;
+      std::cout << "t: '" << y << "'" << std::endl;
       this->c = (t - this->val) - y;
+      std::cout << "this->c: '" << this->c << "'" << std::endl;
       this->val = t;
+      std::cout << "FINAL VAL: '" << this->val << "'" << std::endl;
       //
       return *this;
    }
+
+   /*
+   friend tkahan<T> operator-(tkahan<T> lhs, const X& rhs)
+   {
+
+   }
+*/
 
    // copy assignment (for any valid element)
    template<class X>
@@ -78,9 +94,13 @@ public:
    }
 };
 
+// =========================================================
+
 using kfloat32 = tkahan<float>;
 using kfloat64 = tkahan<double>;
 using kfloat128 = tkahan<long double>;
+
+// =========================================================
 
 // Testing type sizes
 
@@ -146,3 +166,31 @@ print_IEEE754(float f32)
 }
 
 } // namespace kahan
+
+// ===============================
+// setting up std::numeric_limits
+// -------------------------------
+
+template<>
+struct std::numeric_limits<kahan::kfloat64>
+{
+   static constexpr bool has_infinity = std::numeric_limits<double>::has_infinity;
+   static constexpr bool has_quiet_NaN = std::numeric_limits<double>::has_quiet_NaN;
+   static constexpr bool has_signaling_NaN = has_quiet_NaN;
+   static constexpr float_denorm_style has_denorm = bool(__DBL_HAS_DENORM__) ? denorm_present : denorm_absent;
+   static constexpr bool has_denorm_loss = std::numeric_limits<double>::has_denorm_loss;
+
+   static constexpr kahan::kfloat64
+   infinity() noexcept { return std::numeric_limits<double>::infinity(); };
+
+   static constexpr kahan::kfloat64
+   quiet_NaN() noexcept { return std::numeric_limits<double>::quiet_NaN(); };
+
+   static constexpr kahan::kfloat64
+   signaling_NaN() noexcept { return std::numeric_limits<double>::signaling_NaN(); };
+
+   static constexpr kahan::kfloat64
+   denorm_min() noexcept { return std::numeric_limits<double>::denorm_min(); };
+
+   static constexpr bool is_iec559 = has_infinity && has_quiet_NaN && has_denorm == denorm_present;
+};

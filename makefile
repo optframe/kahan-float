@@ -1,5 +1,5 @@
 all:
-	g++ src/main_test.cpp -o appMain
+	g++ --std=c++11 src/main_test.cpp -o appMain
 
 test:
 	cd tests && make

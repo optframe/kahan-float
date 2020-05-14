@@ -103,6 +103,30 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
    REQUIRE(f2 == ff2);
    REQUIRE(ff2 == kff2);
 
+   // ================== NAN constant ================
+   {
+      float fn = NAN;
+      double ffn = NAN;
+      kfloat64 kffn = NAN;
+
+      REQUIRE(std::isnan(fn));
+      REQUIRE(std::isnan(ffn));
+      REQUIRE(std::isnan(kffn));
+   }
+
+   // ================== SNAN constant ================
+   {
+      float fn = SNANF;
+      double ffn = SNAN;
+      long double lffn = SNANL;
+      kfloat64 kffn = SNAN;
+
+      REQUIRE(std::isnan(fn));
+      REQUIRE(std::isnan(ffn));
+      REQUIRE(std::isnan(lffn));
+      REQUIRE(std::isnan(kffn));
+   }
+
    // ================== 1/0 ================
    {
       float fx = fone / (fone - fone + fzero);
@@ -123,6 +147,11 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
       REQUIRE(fm1 == -std::numeric_limits<float>::infinity());
       REQUIRE(ffm1 == -std::numeric_limits<double>::infinity());
       REQUIRE(kffm1 == -std::numeric_limits<kfloat64>::infinity());
+   }
+   // =============== STANDARD NAN =================
+   {
+      REQUIRE(std::isnan(0.0 / 0.0));
+      REQUIRE(std::isnan(INFINITY - INFINITY));
    }
    // =============== ONE MINUS REVERSE =================
    {

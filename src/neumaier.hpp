@@ -127,9 +127,8 @@ public:
 
    bool operator==(const tneumaier<T>& other) const
    {
-      // strict check if both parts are the same (value and error 'c')
-      // if you want weaker tests, cast to 'double' or 'float' before
-      return (this->val == other.val) && (this->c == other.c);
+      // since do not cache updated values, we should compare sums here
+      return (this->val + this->c == other.val + other.c);
    }
 
    bool operator!=(const tneumaier<T>& other) const
@@ -151,21 +150,19 @@ public:
 
    bool operator<=(const tneumaier<T>& other) const
    {
-      // time to use accumulator 'c'
-      return ((*this) < other) || ((*this) == other);
+      return (this->val + this->c) <= (other.val + other.c);
    }
 
    bool operator>=(const tneumaier<T>& other) const
    {
-      // time to use accumulator 'c'
-      return ((*this) > other) || ((*this) == other);
+      return (this->val + this->c) >= (other.val + other.c);
    }
 
    // ==================
 
    friend std::ostream& operator<<(std::ostream& os, const tneumaier<T>& k)
    {
-      os << k.val; // note this doesn't get updated value... must remove 'const'
+      os << (k.val + k.c);
       return os;
    }
 };

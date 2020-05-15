@@ -216,6 +216,7 @@ TEST_CASE("Kahan Tests basic compare kfloat")
    kfloat64 f1 = 0.0;
    kfloat64 f2 = 1.0;
    REQUIRE(f1 == f1);
+   REQUIRE(f2 == 1.0);
    REQUIRE(f1 <= f1);
    REQUIRE(f1 >= f1);
    REQUIRE(f1 < f2);
@@ -301,4 +302,32 @@ TEST_CASE("Kahan Tests neumeier basic [1,10^100, 1, -10^100]")
    nffsum += 1;
    nffsum += -::pow(10, 100); // or just '-1e100'
    REQUIRE(nffsum == 2);      // expected 2.0, yesss!!!
+}
+
+TEST_CASE("Kahan Tests basic compare nfloat")
+{
+   nfloat64 f1 = 0.0;
+   nfloat64 f2 = 1.0;
+   REQUIRE(f1 == f1);
+   REQUIRE(f2 == 1.0);
+   REQUIRE(f1 <= f1);
+   REQUIRE(f1 >= f1);
+   REQUIRE(f1 < f2);
+   REQUIRE(f1 <= f2);
+   REQUIRE(f2 > f1);
+   REQUIRE(f2 >= f1);
+   REQUIRE(f2 != f1);
+}
+
+TEST_CASE("Kahan Tests basic operator<< neumaier")
+{
+   nfloat64 nffsum = 0;
+   REQUIRE(nffsum == 0); // starts empty
+   nffsum += 1;
+   nffsum += ::pow(10, 100); // or just '1e100'
+   nffsum += 1;
+   nffsum += -::pow(10, 100); // or just '-1e100'
+   std::stringstream ss;
+   ss << nffsum;
+   REQUIRE(ss.str() == "2");
 }

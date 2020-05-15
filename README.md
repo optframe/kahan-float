@@ -1,7 +1,7 @@
 # kahan-float
 ## Kahan Floating-Point (in C++)
 
-This project provides simple implementation of a float type with Kahan Summation strategy.
+This project provides simple implementation of a float type with [Kahan Summation](https://en.wikipedia.org/wiki/Kahan_summation_algorithm) strategy.
 
 
 ## How to use?

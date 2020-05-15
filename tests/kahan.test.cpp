@@ -221,3 +221,22 @@ TEST_CASE("Kahan Tests basic compare kfloat")
    REQUIRE(f2 > f1);
    REQUIRE(f2 != f1);
 }
+
+TEST_CASE("Kahan Tests basic some numeric_limits")
+{
+   REQUIRE(std::numeric_limits<kfloat32>::lowest() == std::numeric_limits<float>::lowest());
+   REQUIRE(std::numeric_limits<kfloat32>::min() == std::numeric_limits<float>::min());
+   REQUIRE(std::numeric_limits<kfloat32>::max() == std::numeric_limits<float>::max());
+
+   REQUIRE(std::numeric_limits<kfloat64>::lowest() == std::numeric_limits<double>::lowest());
+   REQUIRE(std::numeric_limits<kfloat64>::min() == std::numeric_limits<double>::min());
+   REQUIRE(std::numeric_limits<kfloat64>::max() == std::numeric_limits<double>::max());
+
+   REQUIRE(std::numeric_limits<kfloat128>::lowest() == std::numeric_limits<long double>::lowest());
+   REQUIRE(std::numeric_limits<kfloat128>::min() == std::numeric_limits<long double>::min());
+   REQUIRE(std::numeric_limits<kfloat128>::max() == std::numeric_limits<long double>::max());
+
+   // max 32 < max 64 < max 128
+   REQUIRE(std::numeric_limits<kfloat32>::max() < std::numeric_limits<kfloat64>::max());
+   REQUIRE(std::numeric_limits<kfloat64>::max() < std::numeric_limits<kfloat128>::max());
+}

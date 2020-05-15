@@ -23,11 +23,20 @@ private:
    T c{ 0 };
 
 public:
+   // this constructor allows promotion of kahan types
+   template<class T2>
+   constexpr tkahan(tkahan<T2> kother)
+     : val(kother.getValue())
+   {
+   }
+
+   // build with T value (not 'explicit', may be automatic!)
    constexpr tkahan(T _val)
      : val(_val)
    {
    }
 
+   // build with T value and T error
    constexpr tkahan(T _val, T _c)
      : val(_val)
      , c(_c)
@@ -236,10 +245,41 @@ print_IEEE754(float f32)
 template<>
 struct std::numeric_limits<kahan::kfloat32>
 {
+   static constexpr bool is_specialized = true;
+
+   static constexpr kahan::kfloat32
+   min() noexcept { return std::numeric_limits<float>::min(); }
+
+   static constexpr kahan::kfloat32
+   max() noexcept { return std::numeric_limits<float>::max(); }
+
+   static constexpr kahan::kfloat32
+   lowest() noexcept { return std::numeric_limits<float>::lowest(); }
+
+   static constexpr int digits = std::numeric_limits<float>::digits;
+   static constexpr int digits10 = std::numeric_limits<float>::digits10;
+
+   static constexpr int max_digits10 = std::numeric_limits<float>::max_digits10;
+   static constexpr bool is_signed = std::numeric_limits<float>::is_signed;
+   static constexpr bool is_integer = std::numeric_limits<float>::is_integer;
+   static constexpr bool is_exact = std::numeric_limits<float>::is_exact;
+   static constexpr int radix = std::numeric_limits<float>::radix;
+
+   static constexpr kahan::kfloat32
+   epsilon() noexcept { return std::numeric_limits<float>::epsilon(); }
+
+   static constexpr kahan::kfloat32
+   round_error() noexcept { return std::numeric_limits<float>::round_error(); }
+
+   static constexpr int min_exponent = std::numeric_limits<float>::min_exponent;
+   static constexpr int min_exponent10 = std::numeric_limits<float>::min_exponent10;
+   static constexpr int max_exponent = std::numeric_limits<float>::max_exponent;
+   static constexpr int max_exponent10 = std::numeric_limits<float>::max_exponent10;
+
    static constexpr bool has_infinity = std::numeric_limits<float>::has_infinity;
    static constexpr bool has_quiet_NaN = std::numeric_limits<float>::has_quiet_NaN;
-   static constexpr bool has_signaling_NaN = has_quiet_NaN;
-   static constexpr float_denorm_style has_denorm = bool(__DBL_HAS_DENORM__) ? denorm_present : denorm_absent;
+   static constexpr bool has_signaling_NaN = std::numeric_limits<float>::has_signaling_NaN;
+   static constexpr float_denorm_style has_denorm = std::numeric_limits<float>::has_denorm;
    static constexpr bool has_denorm_loss = std::numeric_limits<float>::has_denorm_loss;
 
    static constexpr kahan::kfloat32
@@ -255,15 +295,53 @@ struct std::numeric_limits<kahan::kfloat32>
    denorm_min() noexcept { return std::numeric_limits<float>::denorm_min(); };
 
    static constexpr bool is_iec559 = has_infinity && has_quiet_NaN && has_denorm == denorm_present;
+
+   static constexpr bool is_bounded = std::numeric_limits<float>::is_bounded;
+   static constexpr bool is_modulo = std::numeric_limits<float>::is_modulo;
+
+   static constexpr bool traps = std::numeric_limits<float>::traps;
+   static constexpr bool tinyness_before = std::numeric_limits<float>::tinyness_before;
+   static constexpr float_round_style round_style = std::numeric_limits<float>::round_style;
 };
 
 template<>
 struct std::numeric_limits<kahan::kfloat64>
 {
+   static constexpr bool is_specialized = true;
+
+   static constexpr kahan::kfloat64
+   min() noexcept { return std::numeric_limits<double>::min(); }
+
+   static constexpr kahan::kfloat64
+   max() noexcept { return std::numeric_limits<double>::max(); }
+
+   static constexpr kahan::kfloat64
+   lowest() noexcept { return std::numeric_limits<double>::lowest(); }
+
+   static constexpr int digits = std::numeric_limits<double>::digits;
+   static constexpr int digits10 = std::numeric_limits<double>::digits10;
+
+   static constexpr int max_digits10 = std::numeric_limits<double>::max_digits10;
+   static constexpr bool is_signed = std::numeric_limits<double>::is_signed;
+   static constexpr bool is_integer = std::numeric_limits<double>::is_integer;
+   static constexpr bool is_exact = std::numeric_limits<double>::is_exact;
+   static constexpr int radix = std::numeric_limits<double>::radix;
+
+   static constexpr kahan::kfloat64
+   epsilon() noexcept { return std::numeric_limits<double>::epsilon(); }
+
+   static constexpr kahan::kfloat64
+   round_error() noexcept { return std::numeric_limits<double>::round_error(); }
+
+   static constexpr int min_exponent = std::numeric_limits<double>::min_exponent;
+   static constexpr int min_exponent10 = std::numeric_limits<double>::min_exponent10;
+   static constexpr int max_exponent = std::numeric_limits<double>::max_exponent;
+   static constexpr int max_exponent10 = std::numeric_limits<double>::max_exponent10;
+
    static constexpr bool has_infinity = std::numeric_limits<double>::has_infinity;
    static constexpr bool has_quiet_NaN = std::numeric_limits<double>::has_quiet_NaN;
    static constexpr bool has_signaling_NaN = has_quiet_NaN;
-   static constexpr float_denorm_style has_denorm = bool(__DBL_HAS_DENORM__) ? denorm_present : denorm_absent;
+   static constexpr float_denorm_style has_denorm = std::numeric_limits<double>::has_denorm;
    static constexpr bool has_denorm_loss = std::numeric_limits<double>::has_denorm_loss;
 
    static constexpr kahan::kfloat64
@@ -279,11 +357,49 @@ struct std::numeric_limits<kahan::kfloat64>
    denorm_min() noexcept { return std::numeric_limits<double>::denorm_min(); };
 
    static constexpr bool is_iec559 = has_infinity && has_quiet_NaN && has_denorm == denorm_present;
+
+   static constexpr bool is_bounded = std::numeric_limits<double>::is_bounded;
+   static constexpr bool is_modulo = std::numeric_limits<double>::is_modulo;
+
+   static constexpr bool traps = std::numeric_limits<double>::traps;
+   static constexpr bool tinyness_before = std::numeric_limits<double>::tinyness_before;
+   static constexpr float_round_style round_style = std::numeric_limits<double>::round_style;
 };
 
 template<>
 struct std::numeric_limits<kahan::kfloat128>
 {
+   static constexpr bool is_specialized = true;
+
+   static constexpr kahan::kfloat128
+   min() noexcept { return std::numeric_limits<long double>::min(); }
+
+   static constexpr kahan::kfloat128
+   max() noexcept { return std::numeric_limits<long double>::max(); }
+
+   static constexpr kahan::kfloat128
+   lowest() noexcept { return std::numeric_limits<long double>::lowest(); }
+
+   static constexpr int digits = std::numeric_limits<long double>::digits;
+   static constexpr int digits10 = std::numeric_limits<long double>::digits10;
+
+   static constexpr int max_digits10 = std::numeric_limits<long double>::max_digits10;
+   static constexpr bool is_signed = std::numeric_limits<long double>::is_signed;
+   static constexpr bool is_integer = std::numeric_limits<long double>::is_integer;
+   static constexpr bool is_exact = std::numeric_limits<long double>::is_exact;
+   static constexpr int radix = std::numeric_limits<long double>::radix;
+
+   static constexpr kahan::kfloat128
+   epsilon() noexcept { return std::numeric_limits<long double>::epsilon(); }
+
+   static constexpr kahan::kfloat128
+   round_error() noexcept { return std::numeric_limits<long double>::round_error(); }
+
+   static constexpr int min_exponent = std::numeric_limits<long double>::min_exponent;
+   static constexpr int min_exponent10 = std::numeric_limits<long double>::min_exponent10;
+   static constexpr int max_exponent = std::numeric_limits<long double>::max_exponent;
+   static constexpr int max_exponent10 = std::numeric_limits<long double>::max_exponent10;
+
    static constexpr bool has_infinity = std::numeric_limits<long double>::has_infinity;
    static constexpr bool has_quiet_NaN = std::numeric_limits<long double>::has_quiet_NaN;
    static constexpr bool has_signaling_NaN = has_quiet_NaN;
@@ -303,4 +419,11 @@ struct std::numeric_limits<kahan::kfloat128>
    denorm_min() noexcept { return std::numeric_limits<long double>::denorm_min(); };
 
    static constexpr bool is_iec559 = has_infinity && has_quiet_NaN && has_denorm == denorm_present;
+
+   static constexpr bool is_bounded = std::numeric_limits<long double>::is_bounded;
+   static constexpr bool is_modulo = std::numeric_limits<long double>::is_modulo;
+
+   static constexpr bool traps = std::numeric_limits<long double>::traps;
+   static constexpr bool tinyness_before = std::numeric_limits<long double>::tinyness_before;
+   static constexpr float_round_style round_style = std::numeric_limits<long double>::round_style;
 };

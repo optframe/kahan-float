@@ -127,7 +127,9 @@ public:
 
    bool operator==(const tneumaier<T>& other) const
    {
-      return (this->val + this->c == other.val + other.c);
+      // strict check if both parts are the same (value and error 'c')
+      // if you want weaker tests, cast to 'double' or 'float' before
+      return (this->val == other.val) && (this->c == other.c);
    }
 
    bool operator!=(const tneumaier<T>& other) const
@@ -137,21 +139,25 @@ public:
 
    bool operator<(const tneumaier<T>& other) const
    {
+      // time to use accumulator 'c'
       return (this->val + this->c) < (other.val + other.c);
    }
 
    bool operator>(const tneumaier<T>& other) const
    {
+      // time to use accumulator 'c'
       return (this->val + this->c) > (other.val + other.c);
    }
 
    bool operator<=(const tneumaier<T>& other) const
    {
+      // time to use accumulator 'c'
       return ((*this) < other) || ((*this) == other);
    }
 
    bool operator>=(const tneumaier<T>& other) const
    {
+      // time to use accumulator 'c'
       return ((*this) > other) || ((*this) == other);
    }
 

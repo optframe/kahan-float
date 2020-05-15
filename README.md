@@ -65,7 +65,7 @@ See example from Tim Peters (sum `1 + 10^100 + 1 - 10^100`):
    kffsum += ::pow(10, 100);
    kffsum += 1;
    kffsum += -::pow(10, 100);
-   REQUIRE(kffsum == 0); // expected 2.0, but error is BAD!
+   assert(kffsum == 0); // expected 2.0, but error is BAD!
 
    // consider 'nfloat64'
    nfloat64 nffsum = 0;
@@ -73,7 +73,7 @@ See example from Tim Peters (sum `1 + 10^100 + 1 - 10^100`):
    nffsum += ::pow(10, 100); 
    nffsum += 1;
    nffsum += -::pow(10, 100); 
-   REQUIRE(nffsum == 2);      // expected 2.0, yesss!!!
+   assert(nffsum == 2);      // expected 2.0, yesss!!!
 ```
 
 ## Install and test

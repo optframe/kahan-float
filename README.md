@@ -6,11 +6,12 @@ This project provides simple implementation of a float type with Kahan Summation
 
 ## How to use?
 
-Just `#include "kahan.hpp"`, a single header library.
-There are two basic types:
+Just `#include "kahan.hpp"`, a single header library. Just get it from [src/kahan.hpp](src/kahan.hpp).
+There are three basic types:
 
 - `kahan::kfloat32`, equivalent to `float`
 - `kahan::kfloat64`, equivalent to `double`
+- `kahan::kfloat128`, equivalent to `long double`
 
 One example is to add `30` times the value `0.1`, result should be `3.0` (but it's only correct on `kfloat32`):
 
@@ -53,6 +54,7 @@ To test it here:
 
 - `make` (basic testing)
 - `make test` (official tests on [catch2](https://github.com/catchorg/Catch2))
+- `make test-coverage` (see `reports/index.html`)
 
 ## Learn more
 

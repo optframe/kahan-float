@@ -8,6 +8,9 @@ demo: demo/main_test.cpp
 
 test:
 	cd tests && make
-	./tests/kahan_test
+
+test-coverage: test
+	cd tests && make test-coverage
+	echo "see tests/reports/index.html for more information"
 
 .PHONY: demo

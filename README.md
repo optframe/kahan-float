@@ -50,11 +50,11 @@ For this reason, *always test* your code, to ensure operations are performing as
 
 Sometimes even kahan summation may fail, and it may be useful to `#include "neumaier.hpp"`.
 
-Neumaier strategy includes three floating points:
+Neumaier strategy includes three floating points (namespace is still `kahan::`):
 
-- `nfloat32` (similar to `kfloat32`)
-- `nfloat64` (similar to `kfloat64`)
-- `nfloat128` (similar to `kfloat128`)
+- `kahan::nfloat32` (similar to `kahan::kfloat32`)
+- `kahan::nfloat64` (similar to `kahan::kfloat64`)
+- `kahan::nfloat128` (similar to `kahan::kfloat128`)
 
 See example from Tim Peters (sum `1 + 10^100 + 1 - 10^100`):
 

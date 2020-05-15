@@ -250,3 +250,38 @@ TEST_CASE("Kahan Tests basic operator<<")
    ss << kf;
    REQUIRE(ss.str() == "1.1");
 }
+
+TEST_CASE("Kahan Tests neumeier basic [1,10^100, 1, -10^100]")
+{
+   double ffbig = ::pow(10, 100);
+   float fbig = ::pow(10, 100);
+   //
+   REQUIRE(fbig == std::numeric_limits<float>::infinity()); // out of precision
+   REQUIRE(ffbig < std::numeric_limits<float>::infinity()); // in precision
+
+   // consider 'double'
+   double ffsum = 0;
+   ffsum += 1;
+   ffsum += ::pow(10, 100);
+   ffsum += 1;
+   ffsum += -::pow(10, 100);
+   REQUIRE(ffsum == 0); // expected 2.0, but error is BAD!
+
+   // consider 'kfloat32'
+   kfloat32 kfsum = 0;
+   kfsum += 1;
+   kfsum += ::pow(10, 100); // breaks precision (inf)
+   kfsum += 1;
+   kfsum += -::pow(10, 100); // inf - inf = nan
+   REQUIRE(std::isnan((float)kfsum));
+
+   // consider 'kfloat64'
+   kfloat64 kffsum = 0;
+   kffsum += 1;
+   kffsum += ::pow(10, 100);
+   kffsum += 1;
+   kffsum += -::pow(10, 100);
+   REQUIRE(kffsum == 0); // expected 2.0, but error is BAD!
+
+   // kahan summation could not save us... try neumeier!
+}

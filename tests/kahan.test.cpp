@@ -209,3 +209,15 @@ TEST_CASE("Kahan Tests infinity kfloat32 kfloat64")
       REQUIRE(std::isnan((double)kff3));
    }
 }
+
+TEST_CASE("Kahan Tests basic compare kfloat")
+{
+   kfloat64 f1 = 0.0;
+   kfloat64 f2 = 1.0;
+   REQUIRE(f1 == f1);
+   REQUIRE(f1 <= f1);
+   REQUIRE(f1 >= f1);
+   REQUIRE(f1 < f2);
+   REQUIRE(f2 > f1);
+   REQUIRE(f2 != f1);
+}

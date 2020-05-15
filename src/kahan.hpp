@@ -5,10 +5,10 @@
 // Date: 29-04-2020 (first proposed, see official release info in beggining of file)
 // License: MIT License
 
+#include <cmath> // isnan
 #include <iostream>
 #include <limits>  // numeric_limits (will extend this below)
 #include <utility> // declval
-#include <cmath> // isnan
 
 namespace kahan {
 
@@ -29,7 +29,8 @@ public:
    }
 
    constexpr tkahan(T _val, T _c)
-     : val(_val), c(_c)
+     : val(_val)
+     , c(_c)
    {
    }
 
@@ -114,9 +115,36 @@ public:
 
    bool operator==(const tkahan<T>& other) const
    {
-      // strict check if both parts are the same...
-      // if you want weaker tests, cast to 'double' or 'float before
+      // strict check if both parts are the same (value and error 'c')
+      // if you want weaker tests, cast to 'double' or 'float' before
       return (this->val == other.val) && (this->c == other.c);
+   }
+
+   bool operator!=(const tkahan<T>& other) const
+   {
+      return !((*this) == other);
+   }
+
+   bool operator<(const tkahan<T>& other) const
+   {
+      // note that this ignores error 'this->c'
+      return this->val < other.val;
+   }
+
+   bool operator>(const tkahan<T>& other) const
+   {
+      // note that this ignores error 'this->c'
+      return this->val > other.val;
+   }
+
+   bool operator<=(const tkahan<T>& other) const
+   {
+      return ((*this) < other) || ((*this) == other);
+   }
+
+   bool operator>=(const tkahan<T>& other) const
+   {
+      return ((*this) > other) || ((*this) == other);
    }
 
    // ==================

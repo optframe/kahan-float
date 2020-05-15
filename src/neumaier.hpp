@@ -62,8 +62,10 @@ public:
 
    // copy assignment (for any valid element)
    template<class X>
-   tneumaier<T>& operator+=(const X& add)
+   tneumaier<T>& operator+=(const X& _add)
    {
+      T add = _add; // converting to correct type
+      //
       // naive solution
       // this->val += add;  // will accumulate errors easily
       //
@@ -84,7 +86,7 @@ public:
 
       // we must ensure that 'c' is never 'contaminated' by 'nan'
       // TODO: verify that this is REALLY safe... looks like.
-      //this->c = std::isnan(this->c) ? 0.0 : this->c; // TODO:
+      this->c = std::isnan(this->c) ? 0.0 : this->c; // TODO:
       //
       return *this;
    }

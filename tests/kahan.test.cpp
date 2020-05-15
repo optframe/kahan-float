@@ -331,3 +331,16 @@ TEST_CASE("Kahan Tests basic operator<< neumaier")
    ss << nffsum;
    REQUIRE(ss.str() == "2");
 }
+
+TEST_CASE("Kahan Tests inf nan neumaier")
+{
+   nfloat64 kff1 = std::numeric_limits<double>::infinity();
+   kff1 += 1;
+   REQUIRE(kff1 == std::numeric_limits<double>::infinity());
+   kff1 -= 1;
+   REQUIRE(kff1 == std::numeric_limits<double>::infinity());
+   nfloat64 kff2 = 1 / 0.0;
+   nfloat64 kff3 = kff1 - kff2;
+
+   REQUIRE(std::isnan((double)kff3));
+}

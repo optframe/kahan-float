@@ -46,9 +46,39 @@ Finally, one can use `kfloat128` (that occupies 32 bytes = 256 bits) and should 
 Benchmarking is not properly done yet, but it is definitely expected to consume more time. Beware of aggressive code optimizations, that may perhaps remove kahan strategy completely (such as in `icc` compiler).
 For this reason, *always test* your code, to ensure operations are performing as expected.
 
+## Comparison with Neumaier
+
+Sometimes even kahan summation may fail, and it may be useful to `#include "neumaier.hpp"`.
+
+Neumaier strategy includes three floating points:
+
+- `nfloat32` (similar to `kfloat32`)
+- `nfloat64` (similar to `kfloat64`)
+- `nfloat128` (similar to `kfloat128`)
+
+See example from Tim Peters (sum `1 + 10^100 + 1 - 10^100`):
+
+```cpp
+   // consider 'kfloat64'
+   kfloat64 kffsum = 0;
+   kffsum += 1;
+   kffsum += ::pow(10, 100);
+   kffsum += 1;
+   kffsum += -::pow(10, 100);
+   REQUIRE(kffsum == 0); // expected 2.0, but error is BAD!
+
+   // consider 'nfloat64'
+   nfloat64 nffsum = 0;
+   nffsum += 1;
+   nffsum += ::pow(10, 100); 
+   nffsum += 1;
+   nffsum += -::pow(10, 100); 
+   REQUIRE(nffsum == 2);      // expected 2.0, yesss!!!
+```
+
 ## Install and test
 
-Just copy `src/kahan.hpp` to your project.
+Just copy `src/kahan.hpp` to your project (or also `src/neumaier.hpp` if you prefer that).
 
 To test it here:
 

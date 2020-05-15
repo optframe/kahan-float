@@ -8,6 +8,7 @@
 // https://github.com/catchorg/Catch2/blob/master/docs/test-cases-and-sections.md
 
 #include "../src/kahan.hpp"
+#include "../src/neumaier.hpp"
 
 using namespace std;
 using namespace kahan;
@@ -283,5 +284,21 @@ TEST_CASE("Kahan Tests neumeier basic [1,10^100, 1, -10^100]")
    kffsum += -::pow(10, 100);
    REQUIRE(kffsum == 0); // expected 2.0, but error is BAD!
 
+   // ==================================================
    // kahan summation could not save us... try neumeier!
+   // --------------------------------------------------
+
+   // THANKS Tim Peters, for the following example
+   //
+   // Raymond Hettinger, Recipe 393090: Binary floating point summation accurate to full precision,
+   // Python implementation of algorithm from Shewchuk (1997) article (28 March 2005).
+
+   // consider 'nfloat64'
+   nfloat64 nffsum = 0;
+   REQUIRE(nffsum == 0); // starts empty
+   nffsum += 1;
+   nffsum += ::pow(10, 100); // or just '1e100'
+   nffsum += 1;
+   nffsum += -::pow(10, 100); // or just '-1e100'
+   REQUIRE(nffsum == 2);      // expected 2.0, yesss!!!
 }

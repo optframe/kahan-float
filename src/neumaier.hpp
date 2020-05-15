@@ -135,6 +135,28 @@ public:
       return !((*this) == other);
    }
 
+   bool operator<(const tneumaier<T>& other) const
+   {
+      return (this->val + this->c) < (other.val + other.c);
+   }
+
+   bool operator>(const tneumaier<T>& other) const
+   {
+      return (this->val + this->c) > (other.val + other.c);
+   }
+
+   bool operator<=(const tneumaier<T>& other) const
+   {
+      return ((*this) < other) || ((*this) == other);
+   }
+
+   bool operator>=(const tneumaier<T>& other) const
+   {
+      return ((*this) > other) || ((*this) == other);
+   }
+
+   // ==================
+
    friend std::ostream& operator<<(std::ostream& os, const tneumaier<T>& k)
    {
       os << k.val; // note this doesn't get updated value... must remove 'const'

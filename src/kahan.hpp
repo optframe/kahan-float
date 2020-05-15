@@ -95,15 +95,6 @@ public:
 
    // ------------------
 
-   /*
-   // copy return (for any valid element)
-   friend tkahan<T> operator+(float lhs, const tkahan<T>& rhs)
-   {
-      lhs += (float)rhs; // reuse '+='
-      return lhs;
-   }
-*/
-
    // copy return (for any valid element)
    template<class X>
    friend tkahan<T> operator+(tkahan<T> lhs, const X& rhs)

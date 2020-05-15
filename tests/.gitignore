@@ -1,1 +1,4 @@
 *_test
+*.gcda
+*.gcno
+reports/

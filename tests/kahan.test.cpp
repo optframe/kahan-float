@@ -218,7 +218,9 @@ TEST_CASE("Kahan Tests basic compare kfloat")
    REQUIRE(f1 <= f1);
    REQUIRE(f1 >= f1);
    REQUIRE(f1 < f2);
+   REQUIRE(f1 <= f2);
    REQUIRE(f2 > f1);
+   REQUIRE(f2 >= f1);
    REQUIRE(f2 != f1);
 }
 
@@ -239,4 +241,12 @@ TEST_CASE("Kahan Tests basic some numeric_limits")
    // max 32 < max 64 < max 128
    REQUIRE(std::numeric_limits<kfloat32>::max() < std::numeric_limits<kfloat64>::max());
    REQUIRE(std::numeric_limits<kfloat64>::max() < std::numeric_limits<kfloat128>::max());
+}
+
+TEST_CASE("Kahan Tests basic operator<<")
+{
+   kfloat32 kf{ 1.1 };
+   std::stringstream ss;
+   ss << kf;
+   REQUIRE(ss.str() == "1.1");
 }

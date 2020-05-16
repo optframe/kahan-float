@@ -2,13 +2,13 @@
 #include <limits> // numeric_limits
 
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main()
-#include "thirdparty/catch2/catch.hpp"
+#include "../thirdparty/catch2/catch.hpp"
 
 // Some instructions for Catch2
 // https://github.com/catchorg/Catch2/blob/master/docs/test-cases-and-sections.md
 
-#include "../src/kahan.hpp"
-#include "../src/neumaier.hpp"
+#include <kahan.hpp>    // 'src' included
+#include <neumaier.hpp> // 'src' included
 
 using namespace std;
 using namespace kahan;

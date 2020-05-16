@@ -1,0 +1,6 @@
+CppCon 2015: Chandler Carruth "Tuning C++: Benchmarks, and CPUs, and Compilers! Oh My!"
+https://www.youtube.com/watch?v=nXaxk27zwlk
+
+CppCon 2017: Matt Godbolt “What Has My Compiler Done for Me Lately? Unbolting the Compiler's Lid”
+https://www.youtube.com/watch?v=bSkpMdDe4g4&feature=youtu.be
+

@@ -88,7 +88,7 @@ To test it here:
 
 ## Benchmarks
 
-On `tests` folder you can find [benchmark](github.com/google/benchmark) tools. To install and run:
+On `tests` folder you can find [benchmark](https://github.com/google/benchmark) tools. To install and run:
 - `make deps`
 - `make bench`
 - `make perf` (will require `sudo` and `perf` installed)
@@ -145,7 +145,7 @@ t_plus_assign<nfloat128>/64/0        37538 ns        37538 ns        18629
 
 Don't know why it behaves like this, because applying clobbering only at a final stage, looks to "solve the issue" (one must deeply verify how benchmarking interferes on real code via `perf`):
 
-So, final overhead looks like around `4x` on practice (and `neumaier` looks faster afterall):
+So, final overhead looks like around `4x` on practice (and `nfloat` looks faster than `kfloat` afterall):
 ```
 t_plus_assign_final_clobber<double>/1/0             1.32 ns         1.32 ns    465124556
 t_plus_assign_final_clobber<double>/16/0            9.73 ns         9.73 ns     70145529

@@ -130,6 +130,22 @@ t_plus_assign<nfloat64>/16/0         101 ns          101 ns      6912502
 t_plus_assign<nfloat64>/64/0         474 ns          474 ns      1477161
 ```
 
+Regarding `kfloat128`, there's some weird results... for longer runs, it is incredibly slow (`50x`) compared to `long double` version:
+```
+t_plus_assign<long double>/1/0        9.08 ns         9.08 ns     75946379
+t_plus_assign<long double>/16/0        152 ns          152 ns      4579032
+t_plus_assign<long double>/64/0        619 ns          619 ns      1115649
+t_plus_assign<kfloat128>/1/0          6.92 ns         6.92 ns     97725530
+t_plus_assign<kfloat128>/16/0         6947 ns         6948 ns        99394
+t_plus_assign<kfloat128>/64/0        29144 ns        29142 ns        23936
+t_plus_assign<nfloat128>/1/0          7.46 ns         7.46 ns     91103858
+t_plus_assign<nfloat128>/16/0         8931 ns         8931 ns        77510
+t_plus_assign<nfloat128>/64/0        37538 ns        37538 ns        18629
+```
+
+Don't know why it behaves like this, so please benchmark your own code when using this library.
+
+
 ## Learn more
 
 To learn more on IEEE754:

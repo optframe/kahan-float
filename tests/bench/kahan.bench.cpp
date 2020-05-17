@@ -103,19 +103,7 @@ BENCHMARK_TEMPLATE(t_plus_assign, float)
    ->Args({64, 0}) // 64 iter - seed 0
 ;
 
-BENCHMARK_TEMPLATE(t_plus_assign, double)
-   ->Args({1, 0}) // 1 iter - seed 0
-   ->Args({16, 0}) // 16 iter - seed 0
-   ->Args({64, 0}) // 64 iter - seed 0
-;
-
 BENCHMARK_TEMPLATE(t_plus_assign, kfloat32)
-   ->Args({1, 0}) // 1 iter - seed 0
-   ->Args({16, 0}) // 16 iter - seed 0
-   ->Args({64, 0}) // 64 iter - seed 0
-;
-
-BENCHMARK_TEMPLATE(t_plus_assign, kfloat64)
    ->Args({1, 0}) // 1 iter - seed 0
    ->Args({16, 0}) // 16 iter - seed 0
    ->Args({64, 0}) // 64 iter - seed 0
@@ -127,29 +115,38 @@ BENCHMARK_TEMPLATE(t_plus_assign, nfloat32)
    ->Args({64, 0}) // 64 iter - seed 0
 ;
 
+BENCHMARK_TEMPLATE(t_plus_assign, double)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
+
+BENCHMARK_TEMPLATE(t_plus_assign, kfloat64)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
+
 BENCHMARK_TEMPLATE(t_plus_assign, nfloat64)
    ->Args({1, 0}) // 1 iter - seed 0
    ->Args({16, 0}) // 16 iter - seed 0
    ->Args({64, 0}) // 64 iter - seed 0
 ;
 
+BENCHMARK_TEMPLATE(t_plus_assign, long double)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
 
+BENCHMARK_TEMPLATE(t_plus_assign, kfloat128)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
 
-
-/*
-int main()
-{
-   
-   double ff = 0.0;
-   int MAXI = 1000000000; // 1B
-   for(int i=0; i<MAXI; i++)
-   {
-        if(i%7 == 0)
-          	ff += i;
-   }
-   std::cout << ff << std::endl;
-
-   return 0;
-}
-
-*/
+BENCHMARK_TEMPLATE(t_plus_assign, nfloat128)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;

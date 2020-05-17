@@ -86,6 +86,50 @@ To test it here:
 - `make test` (official tests on [catch2](https://github.com/catchorg/Catch2))
 - `make test-coverage` (see `reports/index.html`)
 
+## Benchmarks
+
+On `tests` folder you can find [benchmark](github.com/google/benchmark) tools. To install and run:
+- `make deps`
+- `make bench`
+- `make perf` (will require `sudo` and `perf` installed)
+- `make perf-report`
+
+A basic sample indicates that `kfloat` and `nfloat` are 2 to 3 times slower than raw versions.
+Experiments varied from a range of attributions, including `1`, `16` and `64` values.
+
+```
+2020-05-17 13:57:00
+Running ./build/kahan_bench
+Run on (4 X 3100 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x2)
+  L1 Instruction 32 KiB (x2)
+  L2 Unified 256 KiB (x2)
+  L3 Unified 3072 KiB (x1)
+Load Average: 0.88, 0.71, 0.71
+------------------------------------------------------------------------
+Benchmark                              Time             CPU   Iterations
+------------------------------------------------------------------------
+t_plus_assign<float>/1/0            1.77 ns         1.77 ns    401515125
+t_plus_assign<float>/16/0           23.4 ns         23.3 ns     29884745
+t_plus_assign<float>/64/0            155 ns          155 ns      4287115
+t_plus_assign<double>/1/0           1.76 ns         1.75 ns    368454731
+t_plus_assign<double>/16/0          20.3 ns         20.3 ns     34340593
+t_plus_assign<double>/64/0           129 ns          129 ns      5369049
+t_plus_assign<kfloat32>/1/0         2.88 ns         2.88 ns    242359192
+t_plus_assign<kfloat32>/16/0         106 ns          106 ns      6638273
+t_plus_assign<kfloat32>/64/0         547 ns          545 ns      1244372
+t_plus_assign<kfloat64>/1/0         2.77 ns         2.77 ns    264395636
+t_plus_assign<kfloat64>/16/0        95.8 ns         95.8 ns      7120360
+t_plus_assign<kfloat64>/64/0         465 ns          465 ns      1473925
+t_plus_assign<nfloat32>/1/0         3.01 ns         3.01 ns    230304808
+t_plus_assign<nfloat32>/16/0         105 ns          105 ns      6659415
+t_plus_assign<nfloat32>/64/0         483 ns          483 ns      1447780
+t_plus_assign<nfloat64>/1/0         2.98 ns         2.98 ns    234288433
+t_plus_assign<nfloat64>/16/0         101 ns          101 ns      6912502
+t_plus_assign<nfloat64>/64/0         474 ns          474 ns      1477161
+```
+
 ## Learn more
 
 To learn more on IEEE754:

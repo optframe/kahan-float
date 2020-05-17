@@ -18,7 +18,14 @@ static void clobber()
 //    benchmark::DoNotOptimize(x)
 //    benchmark::ClobberMemory()
 // -------------------------------
-
+// some info on asm (2017 talk cppcon): 
+//    CppCon 2017: Matt Godbolt “What Has My Compiler Done for Me Lately? Unbolting the Compiler's Lid”
+//    https://www.youtube.com/watch?v=bSkpMdDe4g4&feature=youtu.be
+// rdi, rsi, rdx ... args
+// rax ... result
+//-----------------------------------------
+// http://quick-bench.com/    (see online)
+// ----------------------------------------
 static void bench_create(benchmark::State &state)
 {
    //while(state.KeepRunning())
@@ -70,4 +77,3 @@ static void bench_norev_push_back(benchmark::State &state)
 }
 BENCHMARK(bench_norev_push_back);
 
-BENCHMARK_MAIN();

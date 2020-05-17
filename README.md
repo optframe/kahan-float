@@ -94,7 +94,7 @@ On `tests` folder you can find [benchmark](github.com/google/benchmark) tools. T
 - `make perf` (will require `sudo` and `perf` installed)
 - `make perf-report`
 
-A basic sample indicates that `kfloat` and `nfloat` are 2 to 3 times slower than raw versions.
+A basic sample indicates that `kfloat` and `nfloat` are 3 to 4 times (around `~3.5x`) slower than raw versions.
 Experiments varied from a range of attributions, including `1`, `16` and `64` values.
 
 ```

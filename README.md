@@ -143,8 +143,31 @@ t_plus_assign<nfloat128>/16/0         8931 ns         8931 ns        77510
 t_plus_assign<nfloat128>/64/0        37538 ns        37538 ns        18629
 ```
 
-Don't know why it behaves like this, so please benchmark your own code when using this library.
+Don't know why it behaves like this, because applying clobbering only at a final stage, looks to "solve the issue" (one must deeply verify how benchmarking interferes on real code via `perf`):
 
+So, final overhead looks like around `4x` on practice (and `neumaier` looks faster afterall):
+```
+t_plus_assign_final_clobber<double>/1/0             1.32 ns         1.32 ns    465124556
+t_plus_assign_final_clobber<double>/16/0            9.73 ns         9.73 ns     70145529
+t_plus_assign_final_clobber<double>/64/0            54.3 ns         54.3 ns     12427363
+t_plus_assign_final_clobber<kfloat64>/1/0           2.31 ns         2.31 ns    299287996
+t_plus_assign_final_clobber<kfloat64>/16/0          75.2 ns         75.2 ns      9148860
+t_plus_assign_final_clobber<kfloat64>/64/0           423 ns          423 ns      1621581
+t_plus_assign_final_clobber<nfloat64>/1/0           2.77 ns         2.77 ns    254712235
+t_plus_assign_final_clobber<nfloat64>/16/0          38.4 ns         38.4 ns     18207250
+t_plus_assign_final_clobber<nfloat64>/64/0           190 ns          190 ns      3674940
+t_plus_assign_final_clobber<long double>/1/0        2.36 ns         2.36 ns    300934858
+t_plus_assign_final_clobber<long double>/16/0       11.5 ns         11.5 ns     59995851
+t_plus_assign_final_clobber<long double>/64/0       45.3 ns         45.3 ns     15438976
+t_plus_assign_final_clobber<kfloat128>/1/0          5.26 ns         5.26 ns    128193936
+t_plus_assign_final_clobber<kfloat128>/16/0         43.9 ns         43.9 ns     15936900
+t_plus_assign_final_clobber<kfloat128>/64/0          239 ns          239 ns      2925523
+t_plus_assign_final_clobber<nfloat128>/1/0          6.08 ns         6.08 ns    109617390
+t_plus_assign_final_clobber<nfloat128>/16/0         54.0 ns         54.0 ns     12548218
+t_plus_assign_final_clobber<nfloat128>/64/0          212 ns          212 ns      3294921
+```
+
+Please benchmark your own code when using this library.
 
 ## Learn more
 

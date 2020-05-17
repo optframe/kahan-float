@@ -150,3 +150,55 @@ BENCHMARK_TEMPLATE(t_plus_assign, nfloat128)
    ->Args({16, 0}) // 16 iter - seed 0
    ->Args({64, 0}) // 64 iter - seed 0
 ;
+
+// templated benchmarks
+template <class F> 
+static void t_plus_assign_final_clobber(benchmark::State &state)
+{
+   for (auto _ : state) 
+   {
+      F f = 0; // accumulator
+      for(int k=0; k<state.range(0); k++)
+        f += k;
+      F f2;
+      benchmark::DoNotOptimize(f2 = f);
+      benchmark::ClobberMemory();
+   }
+}
+
+
+BENCHMARK_TEMPLATE(t_plus_assign_final_clobber, double)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
+
+BENCHMARK_TEMPLATE(t_plus_assign_final_clobber, kfloat64)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
+
+BENCHMARK_TEMPLATE(t_plus_assign_final_clobber, nfloat64)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
+
+BENCHMARK_TEMPLATE(t_plus_assign_final_clobber, long double)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
+
+BENCHMARK_TEMPLATE(t_plus_assign_final_clobber, kfloat128)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;
+
+BENCHMARK_TEMPLATE(t_plus_assign_final_clobber, nfloat128)
+   ->Args({1, 0}) // 1 iter - seed 0
+   ->Args({16, 0}) // 16 iter - seed 0
+   ->Args({64, 0}) // 64 iter - seed 0
+;

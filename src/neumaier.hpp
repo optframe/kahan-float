@@ -39,6 +39,11 @@ public:
    {
    }
 
+   // empty
+   constexpr tneumaier()
+   {
+   }
+
    T getValue() const
    {
       //this->val += this->c;

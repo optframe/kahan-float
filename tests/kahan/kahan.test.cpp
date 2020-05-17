@@ -13,6 +13,19 @@
 using namespace std;
 using namespace kahan;
 
+
+TEST_CASE("Kahan Tests kfloat32 empty == 0.0")
+{
+   kfloat32 kf32;
+   REQUIRE((float)kf32 == 0.0);
+}
+
+TEST_CASE("Kahan Tests nfloat32 empty == 0.0")
+{
+   nfloat32 nf32;
+   REQUIRE((float)nf32 == 0.0);
+}
+
 TEST_CASE("Kahan Tests kfloat32(1.0) == 1.0")
 {
    float f = 1.0;

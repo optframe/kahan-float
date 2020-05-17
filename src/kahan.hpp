@@ -43,6 +43,11 @@ public:
    {
    }
 
+   // empty
+   constexpr tkahan()
+   {
+   }
+
    T getValue() const
    {
       return this->val;

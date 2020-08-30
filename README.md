@@ -176,6 +176,8 @@ To learn more on IEEE754:
 - https://en.wikipedia.org/wiki/IEEE_754
 - https://www.h-schmidt.net/FloatConverter/IEEE754.html
 
+System that optimizes floating point strategies:
+   - http://herbie.uwplse.org (written in Racket programming language)
 
 ## License
 

@@ -1,5 +1,5 @@
 all: test
-	./build/kahan_test
+	./build/kahan_test -d yes
 
 test:
 	g++ --std=c++11 -I../src --coverage kahan/kahan.test.cpp -o build/kahan_test

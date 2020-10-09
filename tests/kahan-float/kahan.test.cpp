@@ -7,8 +7,8 @@
 // Some instructions for Catch2
 // https://github.com/catchorg/Catch2/blob/master/docs/test-cases-and-sections.md
 
-#include <kahan.hpp>    // 'src' included
-#include <neumaier.hpp> // 'src' included
+#include <kahan-float/kahan.hpp>    // 'src' included
+#include <kahan-float/neumaier.hpp> // 'src' included
 
 using namespace std;
 using namespace kahan;

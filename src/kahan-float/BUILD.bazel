@@ -5,13 +5,13 @@ package(
 cc_library(
     name = "kahan",
     hdrs = ["kahan.hpp"],
-    includes=["."],
+    includes=[".."],
     copts = ["-std=c++11"]
 )
 
 cc_library(
     name = "neumaier",
     hdrs = ["neumaier.hpp"],
-    includes=["."],
+    includes=[".."],
     copts = ["-std=c++11"]
 )

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "kahan.hpp"
+#include "kahan-float/kahan.hpp"
 
 using namespace std;
 //using namespace kahan;

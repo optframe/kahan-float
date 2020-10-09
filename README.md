@@ -9,6 +9,8 @@ This project provides simple implementation of a float type with [Kahan Summatio
 
 First, install [Bazel Build](https://bazel.build): `npm install -g @bazel/bazelisk`
 
+Also, install bazel buildifier (recommended): `go get -v github.com/bazelbuild/buildtools/buildifier` (should appear on `$HOME/go/bin`) 
+
 To run tests: `bazel test ...` or `bazel test //tests:all-tests --test_output="all"`
 
 To generate demo binary: `bazel build ...` or `bazel build demo:app_demo`

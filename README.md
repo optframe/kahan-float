@@ -9,7 +9,7 @@ This project provides simple implementation of a float type with [Kahan Summatio
 
 First, install [Bazel Build](https://bazel.build): `npm install -g @bazel/bazelisk`
 
-To run tests: `bazel test ...`
+To run tests: `bazel test ...` or `bazel test //tests:all-tests --test_output="all"`
 
 To generate demo binary: `bazel build ...` or `bazel build demo:app_demo`
 

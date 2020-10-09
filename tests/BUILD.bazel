@@ -13,3 +13,10 @@ cc_library(
     name = "catch2",
     hdrs = ["thirdparty/catch2/catch.hpp"]
 )
+
+test_suite(
+    name = "all-tests",
+    tests = [
+        "kahan_test"
+    ]
+)

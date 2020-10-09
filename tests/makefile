@@ -2,7 +2,7 @@ all: test
 	./build/kahan_test -d yes
 
 test:
-	g++ --std=c++11 -fsanitize=address -g3 -I../src --coverage kahan/kahan.test.cpp -o build/kahan_test
+	g++ --std=c++11 -fsanitize=address -g3 -I../src --coverage kahan-float/kahan.test.cpp -o build/kahan_test
 
 test-coverage:
 	mkdir -p reports

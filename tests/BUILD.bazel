@@ -5,7 +5,7 @@ load("@rules_cc//cc:defs.bzl", "cc_test")
 cc_test(
     name = "kahan_test",
     srcs = ["kahan-float/kahan.test.cpp"],
-    deps = ["//src/kahan-float:kahan", "//src/kahan-float:neumaier", ":catch2"],
+    deps = ["//src:kahan-float", ":catch2"],
 )
 
 

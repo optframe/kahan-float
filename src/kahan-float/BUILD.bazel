@@ -5,13 +5,32 @@ package(
 cc_library(
     name = "kahan",
     hdrs = ["kahan.hpp"],
-    includes=[".."],
-    copts = ["-std=c++11"]
+    includes=["."],
+    copts = ["-std=c++11"],
+    include_prefix="kahan-float",
+    # https://docs.bazel.build/versions/master/bazel-and-cpp.html#include-paths
 )
 
 cc_library(
     name = "neumaier",
     hdrs = ["neumaier.hpp"],
-    includes=[".."],
-    copts = ["-std=c++11"]
+    includes=["."],
+    copts = ["-std=c++11"],
+    include_prefix="kahan-float"
+    # https://docs.bazel.build/versions/master/bazel-and-cpp.html#include-paths
 )
+
+cc_library(
+    name = "all",
+    hdrs = glob([
+        "**/*.hpp",
+    ]),
+    include_prefix="kahan-float"
+    # https://docs.bazel.build/versions/master/bazel-and-cpp.html#include-paths
+)
+
+
+#filegroup(
+#    name = "kahan-float",
+#    srcs = glob(["**"]),
+#)

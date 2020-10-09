@@ -1,0 +1,17 @@
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "kahan",
+    hdrs = ["kahan.hpp"],
+    includes=["."],
+    copts = ["-std=c++11"]
+)
+
+cc_library(
+    name = "neumaier",
+    hdrs = ["neumaier.hpp"],
+    includes=["."],
+    copts = ["-std=c++11"]
+)

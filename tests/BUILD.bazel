@@ -1,0 +1,15 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+cc_test(
+    name = "kahan_test",
+    srcs = ["kahan/kahan.test.cpp"],
+    deps = ["//src:kahan", "//src:neumaier", ":catch2"],
+)
+
+
+cc_library(
+    name = "catch2",
+    hdrs = ["thirdparty/catch2/catch.hpp"]
+)

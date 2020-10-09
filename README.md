@@ -4,6 +4,21 @@
 This project provides simple implementation of a float type with [Kahan Summation](https://en.wikipedia.org/wiki/Kahan_summation_algorithm) strategy.
 
 
+## Building
+### Bazel Build
+
+First, install [Bazel Build](https://bazel.build): `npm install -g @bazel/bazelisk`.
+
+To run tests: `bazel test ...`
+
+To generate demo binary: `bazel build demo:app_demo`
+
+Run demo binary: `./bazel-bin/demo/app_demo`
+
+### GNU Makefile
+
+Just follow typical makefile instructions: `make test` or `make`.
+
 ## How to use?
 
 Just `#include "kahan.hpp"`, a single header library. Just get it from [src/kahan.hpp](src/kahan.hpp).
@@ -70,9 +85,9 @@ See example from Tim Peters (sum `1 + 10^100 + 1 - 10^100`):
    // consider 'nfloat64'
    nfloat64 nffsum = 0;
    nffsum += 1;
-   nffsum += ::pow(10, 100); 
+   nffsum += ::pow(10, 100);
    nffsum += 1;
-   nffsum += -::pow(10, 100); 
+   nffsum += -::pow(10, 100);
    assert(nffsum == 2);      // expected 2.0, yesss!!!
 ```
 

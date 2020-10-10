@@ -2,7 +2,7 @@ all: test
 	./build/kahan_test -d yes
 
 test:
-	g++ --std=c++11 -fsanitize=address -g3 -I../src --coverage kahan-float/kahan.test.cpp -o build/kahan_test
+	g++ --std=c++11 -fsanitize=address -g3 -I../src --coverage kahan-float_tests/kahan.test.cpp -o build/kahan_test
 
 test-coverage:
 	mkdir -p reports
@@ -16,7 +16,7 @@ GBENCH_LIBS=-lbenchmark
 
 bench: all.bench.cpp
 	#clang++ $< $(CLANGFLAGS_BCH) -I../src $(GBENCH_DIRS) -o build/kahan_bench $(GBENCH_LIBS) -lpthread
-	g++-10.1 $< $(CXXFLAGS_BCH) -I../src $(GBENCH_DIRS) -o build/kahan_bench $(GBENCH_LIBS) -lpthread
+	g++-10 $< $(CXXFLAGS_BCH) -I../src $(GBENCH_DIRS) -o build/kahan_bench $(GBENCH_LIBS) -lpthread
 
 #PERF=./perf-4.19.0/tools/perf/perf
 PERF=linux-4.16.12/tools/perf/perf

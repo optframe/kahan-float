@@ -4,7 +4,7 @@ package(default_visibility = ["//visibility:public"])
 
 cc_test(
     name = "kahan_test",
-    srcs = ["kahan-float/kahan.test.cpp"],
+    srcs = ["kahan-float_tests/kahan.test.cpp"],
     deps = ["//src:kahan-float", ":catch2"],
 )
 

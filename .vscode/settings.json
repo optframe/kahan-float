@@ -92,6 +92,8 @@
             }
         ]
     },
-    "testMate.cpp.test.executables": "{tests,build,Build,BUILD,out,Out,OUT,bazel-bin}/**/*{test,Test,TEST}*"
+    //"testMate.cpp.test.executables": "{tests,build,Build,BUILD,out,Out,OUT,bazel-bin}/**/*{test,Test,TEST}*",
+    "testMate.cpp.test.executables": "{bazel-bin}/**/*{test,Test,TEST}*",
+    "bazel.pathsToIgnore": ["./tests/thirdparty"],
     // ...
 }

@@ -4,8 +4,8 @@
 #include <vector>
 #include <random>
 
-#include <kahan.hpp> // from 'src'
-#include <neumaier.hpp> // from 'src'
+#include <kahan-float/kahan.hpp> // from 'src'
+#include <kahan-float/neumaier.hpp> // from 'src'
 
 using namespace kahan;
 

@@ -16,7 +16,12 @@
         {
             "label": "all-tests",
             "type": "shell",
-            "command": "bazel run tests:all-tests"
+            "command": "bazel run tests:all-tests",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

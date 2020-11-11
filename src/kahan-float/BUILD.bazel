@@ -23,7 +23,7 @@ cc_library(
 )
 
 cc_library(
-    name = "all",
+    name = "all_hpp",
     hdrs = glob([
         "**/*.hpp",
     ]),

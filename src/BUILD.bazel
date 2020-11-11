@@ -15,7 +15,7 @@ package(
 cc_library(
     name = "kahan-float",
     #deps = ["//src/kahan-float:kahan", "//src/kahan-float:neumaier"],
-    deps = ["//src/kahan-float:all"],
+    deps = ["//src/kahan-float:all_hpp"],
     #visibility = ["//visibility:public"],
 )
 

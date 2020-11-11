@@ -17,6 +17,11 @@ To generate demo binary: `bazel build ...` or `bazel build demo:app_demo`
 
 Run demo binary: `./bazel-bin/demo/app_demo`
 
+#### Debug 
+List all headers: bazel query 'labels(hdrs, //...)'
+
+Note that this doesn't consider 'include_prefix', which is important. Must fix this.
+
 ### GNU Makefile
 
 Just follow typical makefile instructions: `make test` or `make`.

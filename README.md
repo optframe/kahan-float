@@ -11,6 +11,9 @@ First, install [Bazel Build](https://bazel.build): `npm install -g @bazel/bazeli
 
 Also, install bazel buildifier (recommended): `go get -v github.com/bazelbuild/buildtools/buildifier` (should appear on `$HOME/go/bin`) 
 
+To install on windows:
+https://medium.com/@igormcoelho/configuring-bazel-build-with-gnu-c-c-on-windows-e27b2c66bed6
+
 To run tests: `bazel test ...` or `bazel test //tests:all-tests --test_output="all"`
 
 To generate demo binary: `bazel build ...` or `bazel build demo:app_demo`
@@ -18,9 +21,17 @@ To generate demo binary: `bazel build ...` or `bazel build demo:app_demo`
 Run demo binary: `./bazel-bin/demo/app_demo`
 
 #### Debug 
-List all headers: bazel query 'labels(hdrs, //...)'
+List all headers: 
+- bazel query 'labels(hdrs, //...)'
+- bazel query 'attr(visibility, "//visibility:public", ...)'
+
 
 Note that this doesn't consider 'include_prefix', which is important. Must fix this.
+
+#### Strange error 
+ERROR: error loading package 'src/bazel-src/external/bazel_tools/tools/jdk'
+
+Try `bazel clean --expunge`, also locate and destroy other `bazel-bin  bazel-optframe-kahan  bazel-out  bazel-testlogs` out there.
 
 ### GNU Makefile
 

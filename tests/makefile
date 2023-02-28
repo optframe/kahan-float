@@ -2,7 +2,7 @@ all: test
 	./build/kahan_test -d yes
 
 test:
-	g++ --std=c++11 -fsanitize=address -g3 -I../src --coverage kahan-float_tests/kahan.test.cpp -o build/kahan_test
+	g++ --std=c++14 -fsanitize=address -g3 -I../include -I./thirdparty/ -Wfatal-errors -fno-exceptions --coverage kahan-float_tests/kahan.test.cpp -DHEADER_ONLY -DCATCH_CONFIG_MAIN ./thirdparty/catch2/catch_amalgamated.cpp -o build/kahan_test
 
 test-coverage:
 	mkdir -p reports
@@ -16,7 +16,7 @@ GBENCH_LIBS=-lbenchmark
 
 bench: all.bench.cpp
 	#clang++ $< $(CLANGFLAGS_BCH) -I../src $(GBENCH_DIRS) -o build/kahan_bench $(GBENCH_LIBS) -lpthread
-	g++-10 $< $(CXXFLAGS_BCH) -I../src $(GBENCH_DIRS) -o build/kahan_bench $(GBENCH_LIBS) -lpthread
+	g++ $< $(CXXFLAGS_BCH) -I../src $(GBENCH_DIRS) -o build/kahan_bench $(GBENCH_LIBS) -lpthread
 
 #PERF=./perf-4.19.0/tools/perf/perf
 PERF=linux-4.16.12/tools/perf/perf
@@ -58,6 +58,7 @@ perf: bench
 perf-report:
 	${PERF} report -g 'graph,0.5,caller'
 
+vendor: deps
 deps:
     # export CXX=/usr/bin/clang++ && make deps
 	./get_gbenchmark.sh

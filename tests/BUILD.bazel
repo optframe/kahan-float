@@ -5,13 +5,16 @@ package(default_visibility = ["//visibility:public"])
 cc_test(
     name = "kahan_test",
     srcs = ["kahan-float_tests/kahan.test.cpp"],
-    deps = ["//src:kahan-float", ":catch2"],
+    deps = ["//include:kahan-float", ":catch2"],
+    defines = ["HEADER_ONLY"]
 )
 
 
 cc_library(
     name = "catch2",
-    hdrs = ["thirdparty/catch2/catch.hpp"]
+    strip_include_prefix = "thirdparty/",
+    hdrs = ["thirdparty/catch2/catch_amalgamated.hpp"],
+    srcs = ["thirdparty/catch2/catch_amalgamated.cpp"],
 )
 
 test_suite(

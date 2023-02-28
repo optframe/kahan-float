@@ -51,7 +51,7 @@ Just follow typical makefile instructions: `make test` or `make`.
 
 ## How to use?
 
-Just `#include "kahan.hpp"`, a single header library. Just get it from [src/kahan.hpp](src/kahan.hpp).
+Just `#include "kahan.hpp"`, a single header library. Just get it from [include/kahan.hpp](include/kahan.hpp).
 There are three basic types:
 
 - `kahan::kfloat32`, equivalent to `float`
@@ -123,7 +123,7 @@ See example from Tim Peters (sum `1 + 10^100 + 1 - 10^100`):
 
 ## Install and test
 
-Just copy `src/kahan.hpp` to your project (or also `src/neumaier.hpp` if you prefer that).
+Just copy `include/kahan.hpp` to your project (or also `include/neumaier.hpp` if you prefer that).
 
 To test it here:
 

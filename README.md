@@ -5,6 +5,18 @@ This project provides simple implementation of a float type with [Kahan Summatio
 
 
 ## Building
+
+### CMake
+
+As usual:
+
+```
+mkdir build
+cd build
+cmake .. -GNinja
+ninja
+```
+
 ### Bazel Build
 
 First, install [Bazel Build](https://bazel.build): `npm install -g @bazel/bazelisk`
